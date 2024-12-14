@@ -21,7 +21,6 @@ jobs:
 
    - name: Run Bandit Scan
      run: bandit -ll -ii -r . -f json -o bandit-report.json
-          cat bandit-report.json
 
    - name: Upload Artifact
      uses: actions/upload-artifact@v4
@@ -39,7 +38,7 @@ jobs:
      uses: actions/checkout@v2
 
    - name: Set up Docker
-     uses: docker-practice/actions-setup-docker@v1
+     uses: docker/setup-buildx-action@v2
      with:
       docker_version: '27.2.0'
 
