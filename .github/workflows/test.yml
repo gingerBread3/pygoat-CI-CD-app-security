@@ -107,7 +107,7 @@ jobs:
       run: pip install trufflehog
 
     - name: Scan for Secrets
-      run: trufflehog git --repo_path . --json > secret-scan-report.json
+      run: trufflehog git --repo_path https://github.com/gingerBread3/pygoat-CI-CD-app-security.git --json > secret-scan-report.json
 
     - name: Upload Secret Scan Report
       uses: actions/upload-artifact@v4
