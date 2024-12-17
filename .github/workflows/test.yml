@@ -104,7 +104,7 @@ jobs:
       uses: actions/checkout@v2
 
     - name: Install TruffleHog
-      run: pip install truffleHog
+      run: pip install trufflehog
 
     - name: Scan for Secrets
       run: trufflehog git --repo_path . --json > secret-scan-report.json
