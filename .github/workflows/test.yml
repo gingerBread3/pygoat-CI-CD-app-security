@@ -107,7 +107,7 @@ jobs:
       run: pip install truffleHog
 
     - name: Scan for Secrets
-      run: trufflehog filesystem --directory . --json > secret-scan-report.json
+      run: trufflehog git --repo_path . --json > secret-scan-report.json
 
     - name: Upload Secret Scan Report
       uses: actions/upload-artifact@v4
