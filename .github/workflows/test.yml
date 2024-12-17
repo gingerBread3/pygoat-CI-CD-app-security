@@ -59,6 +59,7 @@ jobs:
 
     - name: Upload Bandit Report
       uses: actions/upload-artifact@v4
+      if: always()
       with:
         name: bandit-findings
         path: bandit-report.json
@@ -90,6 +91,7 @@ jobs:
 
     - name: Upload ZAP Scan Report
       uses: actions/upload-artifact@v4
+      if: always()
       with:
         name: zap-scan-report
         path: /zap/wrk/
@@ -111,6 +113,7 @@ jobs:
 
     - name: Upload Secret Scan Report
       uses: actions/upload-artifact@v4
+      if: always()
       with:
         name: secret-scan-findings
         path: secret-scan-report.json
@@ -132,6 +135,7 @@ jobs:
 
     - name: Upload SBOM
       uses: actions/upload-artifact@v4
+      if: always()
       with:
         name: sbom
         path: sbom.json
@@ -164,6 +168,7 @@ jobs:
 
     - name: Upload Docker Scout Findings
       uses: actions/upload-artifact@v4
+      if: always()
       with:
         name: docker-scout-findings
         path: scout-report.sarif
