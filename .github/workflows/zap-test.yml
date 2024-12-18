@@ -27,7 +27,8 @@ jobs:
           password: ${{ secrets.DOCKERHUB_PWD }}
 
       - name: Pull ZAP Docker Image 
-        run: docker pull ghcr.io/zaproxy/zap2docker-stable:latest
+        run: docker pull owasp/zap2docker-stable:latest
+
 
       - name: Start ZAP API
         run: |
