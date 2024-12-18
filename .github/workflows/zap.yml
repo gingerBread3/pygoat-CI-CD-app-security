@@ -1,20 +1,29 @@
 name: OWASP ZAP Security Scan
 
-on: [push]
+on:
+  push:
+    branches:
+      - main
 
 jobs:
   zap_scan:
     runs-on: ubuntu-latest
     name: Run DAST scan on the web application
-    
+
     steps:
       - name: Checkout source code
         uses: actions/checkout@v3
-            
+
+      - name: Log in to Docker Hub
+        uses: docker/login-action@v2
+        with:
+          username: ${{ secrets.REPO_USER }}
+          password: ${{ secrets.REPO_PWO }}
+
       - name: Run OWASP ZAP scan
         uses: zaproxy/action-baseline@v0.6.1
         with:
-          docker_name: 'owasp/zap2docker-stable'
+          docker_name: 'owasp/zap2docker'
           target: http://localhost:3000
-          rules_file_name: '.zap/rules.tsv'
+          rules_file_name: '.zap/rules.tsv' # Only if you need custom rules
           cmd_options: '-a'
