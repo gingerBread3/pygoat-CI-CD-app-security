@@ -140,7 +140,7 @@ jobs:
         python-version: 3.8
 
     - name: Generate SBOM for Python Dependencies 
-      run: cyclonedx-py --input-file ./requirements.txt --output-file ./bom.json --output-format json
+      run: cyclonedx-bom --input-file ./requirements.txt --output-file ./bom.json --output-format json
 
     - name: Upload SBOM
       uses: actions/upload-artifact@v4
