@@ -134,8 +134,13 @@ jobs:
     - name: Set up CycloneDX
       run: pip install cyclonedx-bom
 
-    - name: Generate SBOM for Python Dependencies
-      run: cyclonedx-bom --output-format json --output-file sbom.json
+    - name: Set up Python 
+      uses: actions/setup-python@v2 
+      with: 
+        python-version: 3.8
+
+    - name: Generate SBOM for Python Dependencies 
+      run: cyclonedx-py --input-file ./requirements.txt --output-file ./bom.json --output-format json
 
     - name: Upload SBOM
       uses: actions/upload-artifact@v4
