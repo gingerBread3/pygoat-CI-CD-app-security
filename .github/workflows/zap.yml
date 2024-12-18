@@ -17,8 +17,8 @@ jobs:
       - name: Log in to Docker Hub
         uses: docker/login-action@v2
         with:
-          username: ${{ secrets.REPO_USER }}
-          password: ${{ secrets.REPO_PWO }}
+          dockerhub-user: ${{ secrets.REPO_USER }}
+          dockerhub-password: ${{ secrets.REPO_PWD }}
 
       - name: Run OWASP ZAP scan
         uses: zaproxy/action-baseline@v0.6.1
