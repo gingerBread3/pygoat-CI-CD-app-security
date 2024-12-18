@@ -30,7 +30,6 @@ jobs:
       path: bandit-report.json
 
  
-
  image_scan:
    name: Build Image and Run Image Scan
    runs-on: ubuntu-latest
@@ -46,7 +45,7 @@ jobs:
      run: docker build -f Dockerfile -t myapp:latest .
     
    - name: Docker Scout Scan
-     uses: docker/scout-action@v1.0.9
+     uses: docker/scout-action@v1.16.1
      with:
        dockerhub-user: ${{ secrets.DOCKERHUB_USER }}
        dockerhub-password: ${{ secrets.DOCKERHUB_PWD }}
@@ -55,7 +54,7 @@ jobs:
        sarif-file: scout-report.sarif
 
    - name: Upload Artifact
-     uses: actions/upload-artifact@v4
+     uses: actions/upload-artifact@v3
      if: always()
      with:
        name: docker-scout-findings
