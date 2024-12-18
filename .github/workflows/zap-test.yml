@@ -23,7 +23,7 @@ jobs:
       - name: Start Django Application
         run: |
           python manage.py runserver 0.0.0.0:3000 &
-        working-directory: ./your-app-folder
+        working-directory: .
 
       - name: Wait for Target Application
         run: |
