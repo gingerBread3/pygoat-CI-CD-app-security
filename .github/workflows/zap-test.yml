@@ -1,4 +1,4 @@
-name: OWASP ZAP Security Scan
+name: OWASP ZAP Security Scan pt.2
 
 on: [push]
 
