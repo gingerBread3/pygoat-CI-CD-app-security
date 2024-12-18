@@ -25,5 +25,4 @@ jobs:
         with:
           docker_name: 'owasp/zap2docker'
           target: http://localhost:3000
-          rules_file_name: '.zap/rules.tsv' # Only if you need custom rules
           cmd_options: '-a'
