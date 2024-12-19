@@ -10,6 +10,28 @@ on:
 
 jobs:
 
+  #Create SBOM
+  create_sbom:
+    name: Create SBOM
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v3
+
+    - name: Generate SBOM
+      uses: advanced-security/sbom-generator-action@v0.0.1
+      id: sbom
+      env: 
+        GITHUB_TOKEN: ${{ github.token }}
+
+    - name: Upload Artifact
+      uses: actions/upload-artifact@v4
+      if: always()
+      with: 
+        name: SBOM-findings
+        path: ${{steps.sbom.outputs.fileName }}
+
   # Secret Scanning
   secret_scan:
     name: Secret Scanner
