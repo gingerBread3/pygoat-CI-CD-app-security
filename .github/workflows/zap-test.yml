@@ -43,7 +43,7 @@ jobs:
       - name: Run OWASP ZAP Scan
         uses: zaproxy/action-full-scan@v0.4.0
         with:
-          target: http://localhost:3000
+          target: 'http://localhost:3000'
           docker_name: 'zaproxy/zap-stable'
           cmd_options: '-a -J zap-report.json'
 
