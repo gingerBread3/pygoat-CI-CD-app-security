@@ -45,7 +45,7 @@ jobs:
         with:
           target: http://localhost:3000
           docker_name: 'zaproxy/zap-stable'
-          cmd_options: '-a'
+          cmd_options: '-a -J zap-report.json'
 
       - name: Upload ZAP Report
         uses: actions/upload-artifact@v4
