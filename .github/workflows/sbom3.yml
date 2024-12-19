@@ -1,0 +1,35 @@
+name: Generate SBOM
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+
+permissions:
+  contents: read
+  packages: read
+
+jobs:
+  generate-sbom:
+    runs-on: ubuntu-latest
+
+    steps:
+      # Checkout the code
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      # Run Anchore SBOM action
+      - name: Generate SBOM
+        uses: anchore/sbom-action@v0
+        with:
+          # Specify the path to the target for the SBOM
+          path: .  # Adjust this to the path containing your Dockerfile or codebase
+          output: sbom.json
+
+      # Upload the SBOM as an artifact
+      - name: Upload SBOM artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: sbom
+          path: sbom.json
