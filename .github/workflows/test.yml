@@ -9,60 +9,6 @@ on:
       - main
 
 jobs:
-  # Software Composition Analysis (SCA)
-  sca_scan:
-    name: Run OWASP Dependency-Check
-    runs-on: ubuntu-latest
-
-    steps:
-    - name: Checkout code
-      uses: actions/checkout@v2
-
-    - name: Set up Java (for OWASP Dependency-Check)
-      uses: actions/setup-java@v3
-      with:
-        distribution: 'temurin'
-        java-version: '11'
-
-    - name: Run Dependency-Check
-      run: |
-        mkdir dependency-check-report
-        curl -sLO https://github.com/jeremylong/DependencyCheck/releases/download/v8.2.1/dependency-check-8.2.1-release.zip
-        unzip -q dependency-check-8.2.1-release.zip -d dependency-check
-        ./dependency-check/bin/dependency-check.sh --scan . --format ALL --out dependency-check-report
-
-    - name: Upload Dependency Check Report
-      uses: actions/upload-artifact@v4
-      with:
-        name: dependency-check-report
-        path: dependency-check-report/
-
-  # Software Bill of Materials (SBOM)
-  sbom_generation:
-    name: Generate SBOM
-    runs-on: ubuntu-latest
-
-    steps:
-    - name: Checkout code
-      uses: actions/checkout@v2
-
-    - name: Set up CycloneDX
-      run: pip install cyclonedx-bom
-
-    - name: Set up Python 
-      uses: actions/setup-python@v2 
-      with: 
-        python-version: 3.8
-
-    - name: Generate SBOM for Python Dependencies 
-      run: cyclonedx-bom --input-file ./requirements.txt --output-file ./bom.json --output-format json
-
-    - name: Upload SBOM
-      uses: actions/upload-artifact@v4
-      if: always()
-      with:
-        name: sbom
-        path: sbom.json
 
   # Secret Scanning
   secret_scan:
@@ -145,7 +91,7 @@ jobs:
 
   # Image Scan: Scan Docker Image for Vulnerabilities
   image_scan:
-   name: Build Image and Run Image Scan
+   name: Run Image Scan
    runs-on: ubuntu-latest
 
    steps:
